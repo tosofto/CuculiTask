@@ -107,7 +107,7 @@ If the next jump matches to the indecated position, it jumps and go on checking 
                     if (nextJump == dist) {
 
                         # go on jumping.
-                        if (isCrossRiver(stones, curPos + posDist, nextJump) == true){
+                        if (canCrossRiver(stones, curPos + posDist, nextJump) == true){
                             
                             # if frog can go on, return true.
                             return true;                            
@@ -150,6 +150,11 @@ Function returns the result.
          *  @param stones: array of stones' position.
          *  @return true if frog can jump to the last stone, false if otherwise.
          */
+        /**
+         *  Determine whether it is possible to jump from the current curPosition to the last stone or not.
+         *  @param stones: array of stones' position.
+         *  @return true if frog can prevJump to the last stone, false if otherwise.
+         */
         function canCrossRiver(stones) {
 
             if(stones.length > 0){
@@ -167,13 +172,16 @@ Function returns the result.
 
                             // loop through possible jump, frog can.
                             for(let jump = prevJump - 1; jump <= prevJump + 1; prevJump++){
+                                
+                                // caculate the next jump.
+                                let nextJump = parseInt(stone) + jump
 
                                 // check if the jump is jumpable and not exceed the last stone.
-                                if(jump > 0 && stone+jump < stones.length){
+                                if(jump > 0 && nextJump < stones.length){
 
                                     // if condition is true, create a new jump history and push prev jumps to current stone.
-                                    jumpLogs[stone+jump] = []
-                                    jumpLogs[stone+jump].push(jump)
+                                    jumpLogs[nextJump] = []
+                                    jumpLogs[nextJump].push(jump)
                                 }
                             }
                         })
