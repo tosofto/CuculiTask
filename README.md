@@ -58,11 +58,11 @@ If not, it starts to follow the logic.
 
 First of all, it loops through possible units that frog can increase or decrease upon previous jump.
 
-While it loops, it also loop through possible position between the last stone to check if the frog can jump or not.
+While it loops, it also loop through possible position from the next stone to the last one to check if the frog can jump or not.
 
 If the indecated position is too far to jump according to the previous jump, it stops loop.
 
-Here, Too near factor is not be considered since it checks if the possible next jump is equal to the indicated position.
+Here, "Too near" factor will not be considered since there's procedure that checks if the possible next jump is equal to the indicated position.
 
 If the next jump matches to the indecated position, it jumps and go on checking & jumping.
 
