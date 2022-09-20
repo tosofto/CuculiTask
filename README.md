@@ -52,7 +52,7 @@ stones is sorted in a strictly increasing order.
 
 This problem can be solved with recursive function.
 
-Recursive function have to stop if it reaches to the last stone.
+Recursive function has to stop if it reaches to the last stone.
 
 If not, it starts to follow the logic.
 
