@@ -81,7 +81,7 @@ If the next jump matches to the indecated position, it jumps and go on checking 
          *  @param stones: array of stones' position.
          *  @param curPos: frog's current position.
          *  @param prevJump: frog's previous jump unit.
-         *  @return true if frog can prevJump to the last stone, false if otherwise.
+         *  @return true if frog can jump to the last stone, false if otherwise.
          */
          function canCrossRiver(stones, curPos, prevJump) {
 
@@ -148,7 +148,7 @@ Function returns the result.
        /**
          *  Determine whether it is possible to jump from the current curPosition to the last stone or not.
          *  @param stones: array of stones' position.
-         *  @return true if frog can prevJump to the last stone, false if otherwise.
+         *  @return true if frog can jump to the last stone, false if otherwise.
          */
         function canCrossRiver(stones) {
 
