@@ -37,13 +37,16 @@
 
                             // loop through possible jump, frog can.
                             for(let jump = prevJump - 1; jump <= prevJump + 1; prevJump++){
+                                
+                                // caculate the next jump.
+                                let nextJump = parseInt(stone) + jump
 
                                 // check if the jump is jumpable and not exceed the last stone.
-                                if(jump > 0 && stone+jump < stones.length){
+                                if(jump > 0 && nextJump < stones.length){
 
                                     // if condition is true, create a new jump history and push prev jumps to current stone.
-                                    jumpLogs[stone+jump] = []
-                                    jumpLogs[stone+jump].push(jump)
+                                    jumpLogs[nextJump] = []
+                                    jumpLogs[nextJump].push(jump)
                                 }
                             }
                         })
