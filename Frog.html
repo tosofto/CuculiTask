@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>David Strager</title>
+    <script type="text/javascript">
+
+        var stones1 = [0,1,3,5,6,8,12,17];
+        var stones2 = [0,1,2,3,4,8,9,11];
+
+
+        // Result for the first input.
+        document.write( "<p>Stones: " + stones1 + "</p>" );
+        document.write( "<p>Result: " + isCrossRiver(stones1 /*stones*/, 0 /*curPos*/, 0 /*prevJump*/) + "</p>" );
+
+        // Result for the second input.
+        document.write( "<p>Stones: " + stones2 + "</p>" );
+        document.write( "<p>Result: " + isCrossRiver(stones2 /*stones*/, 0 /*curPos*/, 0 /*prevJump*/) + "</p>" );
+
+        /**
+         *  Determine whether it is possible to jump from the current curPosition to the last stone or not.
+         *  @param stones: array of stones' position.
+         *  @param curPos: frog's current curPosition.
+         *  @param prevJump: frog's previous jump unit.
+         *  @return true if frog can prevJump to the last stone, false if otherwise.
+         */
+        function isCrossRiver(stones, curPos, prevJump) {
+
+            // if the current curPosition is the last stone, return true.
+            if (curPos == stones.length - 1) return true;
+
+            // loop through curPossible unit which can be applied to the previous prevJump.
+            for (var jumpUnit = -1; jumpUnit < 2; jumpUnit ++) {
+
+                // loop from the next stone to the last stone.
+                for (var posDist = 1; curPos + posDist < stones.length; posDist ++) {
+
+                    // the distance between the current position and the indecated position.
+                    var dist = stones[curPos + posDist] - stones[curPos];
+
+                    // if the distance is too long or short to jump, break.
+                    if (dist > prevJump + 1 || dist < prevJump -1) break;
+
+                    // determine the next jump.
+                    var nextJump = prevJump + jumpUnit;
+
+                    // if the next jump matches to the distance of the next stone, continue recursive procedure.
+                    if (nextJump == dist) {
+
+                        // go on jumping.
+                        if (isCrossRiver(stones, curPos + posDist, nextJump) == true){
+                            
+                            // if frog can go on, return true.
+                            return true;                            
+                        }
+
+                    }
+
+                }
+            }
+
+            // if there's not any possibility, return false.
+            return false;
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
