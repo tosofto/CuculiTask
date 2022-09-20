@@ -50,9 +50,11 @@ stones is sorted in a strictly increasing order.
 
 ## Solution
 
-This problem can be solved with recursive function but it's time complexity is O(3^n) which means too slow as the array's length is increasing.
+This problem can be solved with recursive function.
 
-For this reason, dynamic programming solution is useful.
+But the time complexity of recursive solution is O(3^n) which means too slow as the array's length is increasing, while it's only O(n^2) in dynamic solution.
+
+Dynamic programming solution is preferred for this problem.
 
 ### Recursitive Solution:
 
