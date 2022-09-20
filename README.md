@@ -50,7 +50,13 @@ stones is sorted in a strictly increasing order.
 
 ## Solution
 
-This problem can be solved with recursive function.
+This problem can be solved with recursive function but it's time complexity is O(3^n) which means too slow as the array's length is increasing.
+
+For this reason, dynamic programming solution is useful.
+
+### Recursitive Solution:
+
+Here is recursitive solution.
 
 Recursive function has to stop if it reaches to the last stone.
 
@@ -68,7 +74,14 @@ If the next jump matches to the indecated position, it jumps and go on checking 
 
 
 ```sh
- function isCrossRiver(stones, curPos, prevJump) {
+        /**
+         *  Determine whether it is possible to jump from the current curPosition to the last stone or not.
+         *  @param stones: array of stones' position.
+         *  @param curPos: frog's current position.
+         *  @param prevJump: frog's previous jump unit.
+         *  @return true if frog can prevJump to the last stone, false if otherwise.
+         */
+         function canCrossRiver(stones, curPos, prevJump) {
 
             # if the current curPosition is the last stone, return true.
             if (curPos == stones.length - 1) return true;
@@ -108,6 +121,71 @@ If the next jump matches to the indecated position, it jumps and go on checking 
         }
 
 ```
+
+### Dynamic solution:
+And here is dynamic programming solution.
+
+First, it checks if the given stones' array is not empty.
+
+If not empty. it creates a new Object which it's key is stone's position and the value is the array of possible previous jumps to get this stone.
+
+Then, it loops through the given stones.
+
+while it loops, it checks if there is any possible previous jumps for the current stone, and if exists, it checks if the next jump can exceed the last stone.
+
+if the next jump don't exceed the last stone, it stoes an array with possible jumps to get on this stone.
+
+Finaly. when the loop finishes, there's jump history for almost stones.
+
+If the last stone has a jump log, it means frog can jump to the last one though we can't track the full jump log to get to the last one.
+
+Function returns the result.
+
+
+```sh
+       /**
+         *  Determine whether it is possible to jump from the current curPosition to the last stone or not.
+         *  @param stones: array of stones' position.
+         *  @return true if frog can prevJump to the last stone, false if otherwise.
+         */
+        function canCrossRiver(stones) {
+
+            if(stones.length > 0){
+                 // create a new object for jump history and initialize it with first position.
+                var jumpLogs = {"0":[0]};
+
+                // loop through stones to create a history.
+                stones.forEach( stone => {
+
+                    // check if the history for current stone exists.
+                    if(jumpLogs[stone]){
+
+                        // if the history exists, loop through history's jump.
+                        jumpLogs[stone].forEach(prevJump => {
+
+                            // loop through possible jump, frog can.
+                            for(let jump = prevJump - 1; jump <= prevJump + 1; prevJump++){
+
+                                // check if the jump is jumpable and not exceed the last stone.
+                                if(jump > 0 && stone+jump < stones.length){
+
+                                    // if condition is true, create a new jump history and push prev jumps to current stone.
+                                    jumpLogs[stone+jump] = []
+                                    jumpLogs[stone+jump].push(jump)
+                                }
+                            }
+                        })
+                    }
+                })
+
+                // finally check if the last stone has got any possible jump and if exists, return true. Otherwise false.
+                return jumpLogs[stones.slice(-1)].length() > 0
+            }
+           
+        }
+```
+
+
 
 This part is for showing result on browser.
 ```sh
