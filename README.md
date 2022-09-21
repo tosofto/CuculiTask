@@ -159,40 +159,38 @@ Function returns the result.
 
             if(stones.length > 0){
                  // create a new object for jump history and initialize it with first position.
-                var jumpLogs = {"0":[0]};
+                let jumpLogs = {};
+
+                stones.forEach( stone => {
+                    jumpLogs[stone] = stone?[] : [0];
+                })
 
                 // loop through stones to create a history.
                 stones.forEach( stone => {
 
-                    // check if the history for current stone exists.
-                    if(jumpLogs[stone]){
-
-                        // if the history exists, loop through history's jump.
+                        // loop through history's jump.
                         jumpLogs[stone].forEach(prevJump => {
 
                             // loop through possible jump, frog can.
-                            for(let jump = prevJump - 1; jump <= prevJump + 1; prevJump++){
+                            for(let jump = prevJump - 1; jump <= prevJump + 1; jump++){
                                 
                                 // caculate the next jump.
                                 let nextJump = parseInt(stone) + jump
-
+                                
                                 // check if the jump is jumpable and not exceed the last stone.
-                                if(jump > 0 && nextJump < stones.length){
+                                if(jump > 0 && jumpLogs[nextJump]){
 
-                                    // if condition is true, create a new jump history and push prev jumps to current stone.
-                                    jumpLogs[nextJump] = []
+                                    // if condition is true, push prev jumps to current stone.
                                     jumpLogs[nextJump].push(jump)
                                 }
                             }
                         })
-                    }
-                })
+                    })
 
-                // finally check if the last stone has got any possible jump and if exists, return true. Otherwise false.
-                return jumpLogs[stones.slice(-1)].length() > 0
+                    // finally check if the last stone has got any possible jump and if exists, return true. Otherwise false.
+                    return jumpLogs[stones[stones.length-1]].length > 0
+                }
             }
-           
-        }
 ```
 
 
